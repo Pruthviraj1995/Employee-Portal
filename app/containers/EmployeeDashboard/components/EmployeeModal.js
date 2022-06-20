@@ -22,25 +22,37 @@ export const EmployeeModal = ({ isOpen, employeeList, handleToggle }) => {
     lname: '',
     email: '',
     role: '',
-    dob: '',
   });
+  const [isError, setIsError] = useState(false);
 
   const handleOnChange = event => {
     const { value, name } = event.target;
     setEData({ ...eData, [name]: value });
+    setIsError(false);
   };
 
   const handleCreate = () => {
-    const newEmployeeList = [
-      ...employeeList,
-      { id: `${eData.fname}01`, ...eData },
-    ];
-    dispatch(
-      updateEmployeeList({
-        employeeList: newEmployeeList,
-      }),
-    );
-    handleToggle();
+    const { fname, lname, email, role } = eData;
+    if (fname && lname && email && role) {
+      const newEmployeeList = [
+        ...employeeList,
+        { id: `${eData.fname}01`, ...eData },
+      ];
+      setEData({
+        fname: '',
+        lname: '',
+        email: '',
+        role: '',
+      });
+      handleToggle();
+      dispatch(
+        updateEmployeeList({
+          employeeList: newEmployeeList,
+        }),
+      );
+    } else {
+      setIsError(true);
+    }
   };
 
   return (
@@ -58,10 +70,14 @@ export const EmployeeModal = ({ isOpen, employeeList, handleToggle }) => {
               value={eData[name]}
               onChange={handleOnChange}
               placeholder={placeHolder}
+              required
             />
             <br />
           </div>
         ))}
+        {isError && (
+          <span className="text-danger p-1">Please Fill all the Fields</span>
+        )}
       </ModalBody>
       <ModalFooter>
         <Button type="button" onClick={handleCreate} className="secondary">

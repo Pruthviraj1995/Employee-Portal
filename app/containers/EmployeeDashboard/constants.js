@@ -17,7 +17,7 @@ export const InputFields = [
     id: 'e01',
     label: 'Email',
     name: 'email',
-    type: 'text',
+    type: 'email',
     placeHolder: 'Enter Email',
   },
   {
