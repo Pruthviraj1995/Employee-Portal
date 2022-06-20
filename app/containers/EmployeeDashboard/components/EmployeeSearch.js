@@ -34,7 +34,7 @@ export const EmployeeSearch = ({ employeeList }) => {
       />
       {searchList.length > 0 &&
         searchList.map(({ id, fname, lname }) => (
-          <div key={id} className="p-1 w-50">
+          <div key={id} className="p-1 mt-1 w-50 beige-color">
             {fname} {lname}
           </div>
         ))}
