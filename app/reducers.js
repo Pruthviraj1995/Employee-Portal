@@ -7,6 +7,7 @@ import { connectRouter } from 'connected-react-router';
 
 import history from 'utils/history';
 import globalReducer from 'containers/App/reducer';
+import employeeDashboardReducer from 'containers/EmployeeDashboard/redux/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 /**
@@ -16,6 +17,7 @@ export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     global: globalReducer,
     language: languageProviderReducer,
+    employeeDashboard: employeeDashboardReducer,
     router: connectRouter(history),
     ...injectedReducers,
   });
